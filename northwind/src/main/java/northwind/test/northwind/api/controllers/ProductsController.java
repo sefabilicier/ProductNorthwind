@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import northwind.test.northwind.business.abstracts.ProductService;
+import northwind.test.northwind.core.utilities.results.DataResult;
+import northwind.test.northwind.core.utilities.results.Result;
 import northwind.test.northwind.entites.concretes.Product;
 
 @RestController
@@ -23,13 +25,13 @@ public class ProductsController {
 	}
 	
 	@GetMapping("/getAll")
-	public List<Product> getAll(){
+	public DataResult<List<Product>> getAll(){
 		return this.productService.getAll();
 	}
 	
 	@PostMapping("/add")
-	public void add(@RequestBody Product product) {
-		this.productService.add(product);
+	public Result add(@RequestBody Product product) {
+		return this.productService.add(product);
 	}
 	
 }

@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import northwind.test.northwind.core.utilities.results.SuccessDataResult;
 import northwind.test.northwind.business.abstracts.ProductService;
+import northwind.test.northwind.core.utilities.results.DataResult;
+import northwind.test.northwind.core.utilities.results.Result;
 import northwind.test.northwind.dataAccess.abstracts.ProductDao;
 import northwind.test.northwind.entites.concretes.Product;
 
@@ -21,14 +24,14 @@ public class ProductManager implements ProductService {
 	}
 
 	@Override
-	public List<Product> getAll() {
-		return this.productDao.findAll();
+	public DataResult<List<Product>> getAll() {
+		return new SuccessDataResult<List<Product>>(this.productDao.findAll(), "Data Listlendi!");	
 	}
 
 	@Override
-	public void add(Product product) {
+	public Result add(Product product) {
 		this.productDao.save(product);
-		return;
+		return new SuccessDataResult<>("Product added");
 	}
 
 }
